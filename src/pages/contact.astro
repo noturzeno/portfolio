@@ -21,10 +21,29 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 		</div>
 		<div class="flex items-center gap-2 md:hidden">
 			<ThemeToggle />
-			<button type="button" class="text-secondary p-2 hover:bg-surface-container-high transition-all bg-transparent border-0 cursor-pointer" aria-label="Menu">
-				<span class="material-symbols-outlined">menu</span>
+			<button
+				type="button"
+				class="text-secondary p-2 hover:bg-surface-container-high transition-all bg-transparent border-0 cursor-pointer"
+				aria-label="Open menu"
+				aria-controls="mobile-menu-contact"
+				aria-expanded="false"
+				data-mobile-menu-toggle
+			>
+				<span class="material-symbols-outlined" aria-hidden="true">menu</span>
 			</button>
 		</div>
+		<nav
+			id="mobile-menu-contact"
+			class="md:hidden hidden absolute top-16 left-0 right-0 bg-surface-container-lowest border-b border-outline/15 px-6 py-4"
+			data-mobile-menu
+		>
+			<div class="flex flex-col gap-3 font-label text-xs tracking-widest uppercase">
+				<a class="text-on-surface-variant hover:text-primary" href="/">Home</a>
+				<a class="text-on-surface-variant hover:text-primary" href="/projects">Projects</a>
+				<a class="text-on-surface-variant hover:text-primary" href="/about">About</a>
+				<a class="text-primary font-semibold" href="/contact">Contact</a>
+			</div>
+		</nav>
 	</header>
 
 	<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen">

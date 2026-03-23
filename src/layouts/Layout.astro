@@ -378,5 +378,47 @@ const tailwindColors = Object.fromEntries(colorKeys.map((k) => [k, twColor(k)]))
 				syncUi();
 			})();
 		</script>
+		<script is:inline>
+			(function () {
+				function closeMenu(button, menu) {
+					button.setAttribute('aria-expanded', 'false');
+					menu.classList.add('hidden');
+				}
+				function openMenu(button, menu) {
+					button.setAttribute('aria-expanded', 'true');
+					menu.classList.remove('hidden');
+				}
+				function setupMobileMenu(button) {
+					var targetId = button.getAttribute('aria-controls');
+					if (!targetId) return;
+					var menu = document.getElementById(targetId);
+					if (!menu) return;
+					closeMenu(button, menu);
+					button.addEventListener('click', function () {
+						var expanded = button.getAttribute('aria-expanded') === 'true';
+						if (expanded) closeMenu(button, menu);
+						else openMenu(button, menu);
+					});
+					menu.addEventListener('click', function (e) {
+						var target = e.target;
+						var link = target && target.closest ? target.closest('a') : null;
+						if (link) closeMenu(button, menu);
+					});
+					document.addEventListener('click', function (e) {
+						var target = e.target;
+						if (!target || !target.closest) return;
+						if (target.closest('[data-mobile-menu]') || target.closest('[data-mobile-menu-toggle]')) return;
+						closeMenu(button, menu);
+					});
+					document.addEventListener('keydown', function (e) {
+						if (e.key === 'Escape') closeMenu(button, menu);
+					});
+					window.addEventListener('resize', function () {
+						if (window.innerWidth >= 768) closeMenu(button, menu);
+					});
+				}
+				document.querySelectorAll('[data-mobile-menu-toggle]').forEach(setupMobileMenu);
+			})();
+		</script>
 	</body>
 </html>
