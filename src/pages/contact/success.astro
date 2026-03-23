@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+---
+
+<Layout title="MESSAGE_SENT // ZENO_TERMINAL">
+	<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-container-lowest border-b border-outline/15 zeno-header-shadow">
+		<a href="/" class="flex items-center gap-3">
+			<span class="material-symbols-outlined text-secondary">terminal</span>
+			<span class="text-xl font-black text-secondary tracking-[-0.04em] font-headline uppercase">ZENO_TERMINAL</span>
+		</a>
+		<div class="flex items-center gap-6">
+			<nav class="hidden md:flex items-center gap-8 font-label text-[10px] tracking-widest text-on-surface-variant">
+				<a class="hover:text-primary transition-all" href="/">HOME</a>
+				<a class="hover:text-primary transition-all" href="/projects">PROJECTS</a>
+				<a class="hover:text-primary transition-all" href="/about">ABOUT</a>
+				<a class="hover:text-primary transition-all" href="/contact">CONTACT</a>
+			</nav>
+			<ThemeToggle />
+		</div>
+	</header>
+
+	<main class="pt-32 pb-24 px-6 max-w-4xl mx-auto min-h-screen flex items-center">
+		<section class="w-full bg-surface-container-low border border-outline/10 p-10 md:p-14">
+			<div class="inline-flex items-center gap-2 px-3 py-1 border border-primary-container/20 bg-primary-container/5 rounded-none mb-8">
+				<span class="w-1.5 h-1.5 bg-primary-container animate-pulse"></span>
+				<span class="font-label text-[10px] tracking-widest text-secondary uppercase">TRANSMISSION_COMPLETE</span>
+			</div>
+			<h1 class="font-headline text-4xl md:text-6xl font-bold tracking-tighter leading-none text-on-surface mb-6">
+				MESSAGE<br />
+				<span class="text-secondary">RECEIVED</span>
+			</h1>
+			<p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-2xl mb-10">
+				Your message has been sent successfully. I will review it and get back to you as soon as possible.
+			</p>
+			<div class="flex flex-wrap gap-4">
+				<a
+					href="/"
+					class="inline-flex items-center px-8 py-4 bg-primary-container text-on-primary font-label font-bold text-sm tracking-widest transition-all active:scale-95 no-underline"
+				>
+					BACK_HOME
+				</a>
+				<a
+					href="/contact"
+					class="inline-flex items-center px-8 py-4 border border-outline/20 text-primary font-label text-sm tracking-widest transition-all active:scale-95 no-underline"
+				>
+					SEND_ANOTHER
+				</a>
+			</div>
+		</section>
+	</main>
+</Layout>
