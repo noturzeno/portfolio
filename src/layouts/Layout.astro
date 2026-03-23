@@ -1,0 +1,382 @@
+---
+export interface ImagePreload {
+	href: string;
+	type?: string;
+	fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+interface Props {
+	title?: string;
+	/** Hint the browser to fetch critical images early (LCP / above-the-fold). */
+	imagePreloads?: ImagePreload[];
+}
+
+const {
+	title = 'ZENO_TERMINAL // Sovereign Developer Portfolio',
+	imagePreloads = [],
+} = Astro.props;
+
+const twColor = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`;
+const colorKeys = [
+	'inverse-primary',
+	'surface-container-low',
+	'primary-container',
+	'on-tertiary-fixed',
+	'secondary',
+	'inverse-on-surface',
+	'surface-tint',
+	'on-primary-container',
+	'surface-container-lowest',
+	'on-tertiary-container',
+	'secondary-fixed',
+	'on-background',
+	'on-tertiary',
+	'surface-dim',
+	'on-surface',
+	'on-primary-fixed-variant',
+	'on-primary-fixed',
+	'surface-container-high',
+	'on-surface-variant',
+	'surface-container-highest',
+	'outline-variant',
+	'on-tertiary-fixed-variant',
+	'on-secondary-fixed',
+	'primary',
+	'tertiary',
+	'on-primary',
+	'error',
+	'primary-fixed-dim',
+	'on-secondary',
+	'surface-variant',
+	'on-error',
+	'secondary-fixed-dim',
+	'surface',
+	'surface-bright',
+	'on-error-container',
+	'on-secondary-fixed-variant',
+	'surface-container',
+	'background',
+	'secondary-container',
+	'primary-fixed',
+	'tertiary-fixed',
+	'tertiary-fixed-dim',
+	'on-secondary-container',
+	'inverse-surface',
+	'outline',
+	'error-container',
+	'tertiary-container',
+] as const;
+
+const tailwindColors = Object.fromEntries(colorKeys.map((k) => [k, twColor(k)]));
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		{
+			imagePreloads.map((p) => (
+				<link
+					rel="preload"
+					href={p.href}
+					as="image"
+					{...(p.type ? { type: p.type } : {})}
+					{...(p.fetchpriority ? { fetchpriority: p.fetchpriority } : {})}
+				/>
+			))
+		}
+
+		<script is:inline>
+			(function () {
+				try {
+					if (localStorage.getItem('zeno-theme') === 'light') document.documentElement.classList.add('light');
+				} catch (e) {}
+			})();
+		</script>
+
+		<link href="https://fonts.googleapis.com" rel="preconnect" />
+		<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+
+		<script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+		<script is:inline id="tailwind-config" set:html={`tailwind.config = ${JSON.stringify(
+			{
+				darkMode: 'class',
+				theme: {
+					extend: {
+						colors: tailwindColors,
+						fontFamily: {
+							headline: ['Space Grotesk'],
+							body: ['Inter'],
+							label: ['JetBrains Mono'],
+						},
+						borderRadius: { DEFAULT: '0.125rem', lg: '0.25rem', xl: '0.5rem', full: '0.75rem' },
+					},
+				},
+			},
+			null,
+			2
+		)}`} />
+
+		<style is:global>
+			:root {
+				color-scheme: dark;
+				--c-inverse-primary: 112 93 0;
+				--c-surface-container-low: 28 27 27;
+				--c-primary-container: 255 215 0;
+				--c-on-tertiary-fixed: 41 24 0;
+				--c-secondary: 246 190 59;
+				--c-inverse-on-surface: 49 48 48;
+				--c-surface-tint: 233 196 0;
+				--c-on-primary-container: 112 94 0;
+				--c-surface-container-lowest: 14 14 14;
+				--c-on-tertiary-container: 120 89 46;
+				--c-secondary-fixed: 255 222 160;
+				--c-on-background: 229 226 225;
+				--c-on-tertiary: 68 43 4;
+				--c-surface-dim: 19 19 19;
+				--c-on-surface: 229 226 225;
+				--c-on-primary-fixed-variant: 84 70 0;
+				--c-on-primary-fixed: 34 27 0;
+				--c-surface-container-high: 42 42 42;
+				--c-on-surface-variant: 208 198 171;
+				--c-surface-container-highest: 53 53 52;
+				--c-outline-variant: 77 71 50;
+				--c-on-tertiary-fixed-variant: 93 66 25;
+				--c-on-secondary-fixed: 38 25 0;
+				--c-primary: 255 246 223;
+				--c-tertiary: 255 245 236;
+				--c-on-primary: 58 48 0;
+				--c-error: 255 180 171;
+				--c-primary-fixed-dim: 233 196 0;
+				--c-on-secondary: 64 45 0;
+				--c-surface-variant: 53 53 52;
+				--c-on-error: 105 0 5;
+				--c-secondary-fixed-dim: 246 190 59;
+				--c-surface: 19 19 19;
+				--c-surface-bright: 57 57 57;
+				--c-on-error-container: 255 218 214;
+				--c-on-secondary-fixed-variant: 92 67 0;
+				--c-surface-container: 32 31 31;
+				--c-background: 19 19 19;
+				--c-secondary-container: 198 147 2;
+				--c-primary-fixed: 255 225 109;
+				--c-tertiary-fixed: 255 221 179;
+				--c-tertiary-fixed-dim: 232 192 140;
+				--c-on-secondary-container: 67 48 0;
+				--c-inverse-surface: 229 226 225;
+				--c-outline: 153 144 119;
+				--c-error-container: 147 0 10;
+				--c-tertiary-container: 253 211 157;
+				--grid-dot: 42 42 42;
+				--glass-panel-bg: rgba(42, 42, 42, 0.4);
+				--glass-panel-border: rgba(255, 255, 255, 0.08);
+				--text-glow-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+				--header-shadow: 0 0 20px rgba(255, 215, 0, 0.05);
+			}
+
+			html.light {
+				color-scheme: light;
+				--c-inverse-primary: 235 208 86;
+				--c-surface-container-low: 243 237 228;
+				--c-primary-container: 255 215 0;
+				--c-on-tertiary-fixed: 41 24 0;
+				--c-secondary: 115 90 0;
+				--c-inverse-on-surface: 244 244 243;
+				--c-surface-tint: 201 162 39;
+				--c-on-primary-container: 58 48 0;
+				--c-surface-container-lowest: 255 255 255;
+				--c-on-tertiary-container: 92 74 40;
+				--c-secondary-fixed: 255 244 212;
+				--c-on-background: 28 27 24;
+				--c-on-tertiary: 74 56 8;
+				--c-surface-dim: 235 229 220;
+				--c-on-surface: 28 27 24;
+				--c-on-primary-fixed-variant: 84 70 0;
+				--c-on-primary-fixed: 34 27 0;
+				--c-surface-container-high: 227 221 212;
+				--c-on-surface-variant: 52 47 39;
+				--c-surface-container-highest: 216 210 201;
+				--c-outline-variant: 106 99 86;
+				--c-on-tertiary-fixed-variant: 93 66 25;
+				--c-on-secondary-fixed: 38 25 0;
+				--c-primary: 42 34 16;
+				--c-tertiary: 61 46 24;
+				--c-on-primary: 58 48 0;
+				--c-error: 186 26 26;
+				--c-primary-fixed-dim: 212 175 55;
+				--c-on-secondary: 255 255 255;
+				--c-surface-variant: 228 221 212;
+				--c-on-error: 255 255 255;
+				--c-secondary-fixed-dim: 201 162 39;
+				--c-surface: 250 247 242;
+				--c-surface-bright: 255 255 255;
+				--c-on-error-container: 65 0 2;
+				--c-on-secondary-fixed-variant: 92 67 0;
+				--c-surface-container: 240 235 227;
+				--c-background: 253 250 245;
+				--c-secondary-container: 232 217 168;
+				--c-primary-fixed: 255 233 145;
+				--c-tertiary-fixed: 255 232 212;
+				--c-tertiary-fixed-dim: 224 200 168;
+				--c-on-secondary-container: 43 34 0;
+				--c-inverse-surface: 49 48 48;
+				--c-outline: 79 72 62;
+				--c-error-container: 255 218 214;
+				--c-tertiary-container: 255 220 194;
+				--grid-dot: 196 189 176;
+				--glass-panel-bg: rgba(255, 255, 255, 0.72);
+				--glass-panel-border: rgba(0, 0, 0, 0.06);
+				--text-glow-shadow: 0 0 14px rgba(201, 162, 39, 0.35);
+				--header-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+			}
+
+			.material-symbols-outlined {
+				font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+			}
+			.glow-gold {
+				box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+			}
+			.text-glow {
+				text-shadow: var(--text-glow-shadow);
+			}
+			.mask-linear {
+				mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+			}
+			.technical-grid {
+				background-image: radial-gradient(circle, rgb(var(--grid-dot)) 1px, transparent 1px);
+				background-size: 32px 32px;
+			}
+			.gilded-glow {
+				box-shadow: 0 0 32px rgba(255, 215, 0, 0.08);
+			}
+			.gilded-glow:hover {
+				box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+			}
+			.glass-panel {
+				background: var(--glass-panel-bg);
+				backdrop-filter: blur(12px);
+				border: 1px solid var(--glass-panel-border);
+			}
+			.glow-primary {
+				box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+			}
+			.text-sheen {
+				background: linear-gradient(45deg, #ffd700, #c69302);
+				-webkit-background-clip: text;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+			@media (prefers-reduced-motion: no-preference) {
+				html {
+					scroll-behavior: smooth;
+				}
+			}
+			body {
+				margin: 0;
+				min-height: max(884px, 100dvh);
+				background-color: rgb(var(--c-background));
+				color: rgb(var(--c-on-surface));
+				font-family: Inter, system-ui, sans-serif;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+			@keyframes marquee {
+				0% {
+					transform: translateX(0);
+				}
+				100% {
+					transform: translateX(-50%);
+				}
+			}
+			.animate-marquee {
+				display: flex;
+				width: fit-content;
+				animation: marquee 30s linear infinite;
+			}
+			.glow-on-hover:hover {
+				box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+			}
+			.hide-scrollbar::-webkit-scrollbar {
+				display: none;
+			}
+			.hide-scrollbar {
+				-ms-overflow-style: none;
+				scrollbar-width: none;
+			}
+
+			#project-filters .filter-btn {
+				border: 1px solid rgb(var(--c-outline) / 0.35);
+				color: rgb(var(--c-on-surface-variant));
+				transition:
+					border-color 0.15s,
+					color 0.15s,
+					background 0.15s;
+			}
+			#project-filters .filter-btn:hover {
+				border-color: rgb(var(--c-primary-container));
+				color: rgb(var(--c-primary-container));
+			}
+			#project-filters .filter-btn--active {
+				background: rgb(var(--c-primary-container));
+				color: rgb(var(--c-on-primary));
+				font-weight: 700;
+				border-color: rgb(var(--c-primary-container));
+			}
+			#project-filters .filter-btn--active:hover {
+				color: rgb(var(--c-on-primary));
+			}
+
+			.zeno-header-shadow {
+				box-shadow: var(--header-shadow);
+			}
+		</style>
+	</head>
+	<body class="bg-background text-on-surface font-body selection:bg-primary-container/40 selection:text-on-primary-container overflow-x-hidden">
+		<slot />
+		<script is:inline>
+			(function () {
+				var KEY = 'zeno-theme';
+				function iconName(isLight) {
+					return isLight ? 'dark_mode' : 'light_mode';
+				}
+				function label(isLight) {
+					return isLight ? 'Switch to dark mode' : 'Switch to light mode';
+				}
+				function syncUi() {
+					var isLight = document.documentElement.classList.contains('light');
+					document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+						btn.setAttribute('aria-label', label(isLight));
+						var ic = btn.querySelector('[data-theme-toggle-icon]');
+						if (ic) ic.textContent = iconName(isLight);
+					});
+				}
+				function apply(theme) {
+					if (theme === 'light') document.documentElement.classList.add('light');
+					else document.documentElement.classList.remove('light');
+					try {
+						localStorage.setItem(KEY, theme);
+					} catch (e) {}
+					syncUi();
+				}
+				document.addEventListener('click', function (e) {
+					var t = e.target;
+					var btn = t && t.closest && t.closest('[data-theme-toggle]');
+					if (!btn) return;
+					e.preventDefault();
+					var next = document.documentElement.classList.contains('light') ? 'dark' : 'light';
+					apply(next);
+				});
+				syncUi();
+			})();
+		</script>
+	</body>
+</html>

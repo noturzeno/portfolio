@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="Zenobuilder CMS private case study package abstract">
+  <defs>
+    <linearGradient id="zbbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#141414"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#zbbg)"/>
+  <g opacity="0.85" stroke="#6b8f7a" stroke-width="1.8" fill="none">
+    <rect x="340" y="380" width="200" height="140" rx="6"/>
+    <rect x="580" y="380" width="280" height="200" rx="6"/>
+    <rect x="340" y="560" width="520" height="180" rx="6"/>
+  </g>
+  <circle cx="600" cy="300" r="36" fill="none" stroke="#9ccc9c" stroke-width="2" opacity="0.55"/>
+  <path d="M600 264 L600 336 M564 300 L636 300" stroke="#9ccc9c" stroke-width="2" opacity="0.55"/>
+  <text x="600" y="820" text-anchor="middle" fill="#9ccc9c" font-family="system-ui,sans-serif" font-size="26" font-weight="700" letter-spacing="0.18em">ZENO</text>
+  <text x="600" y="862" text-anchor="middle" fill="#888" font-family="system-ui,sans-serif" font-size="15" letter-spacing="0.2em">CMS CASE STUDY PACKAGE</text>
+</svg>
